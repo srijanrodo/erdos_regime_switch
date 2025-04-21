@@ -56,7 +56,6 @@ We use f1_score as our measurement of performance. Here is a table showing some 
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
-
 </style>
 <table border="1" class="dataframe">
   <thead>
