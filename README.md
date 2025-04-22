@@ -220,7 +220,7 @@ We incorporated the sentiment scores generated from the news headlines as an add
 
 ## Final Thoughts  
 
-Additonally we ran the GOOGL trained model on MSFT stock data (not seen by any of our models before) and yielded positive results (accuracy score of 95.5% and F1-Score of 97.5%). This could indicate strong correlation between companies within the same market sector. For future directions, we could:
+Additonally we ran the GOOGL trained model on MSFT stock data (not seen by any of our models before) and yielded positive results (accuracy score of 96.4% and F1-Score of 98.1%). This could indicate strong correlation between companies within the same market sector. For future directions, we could:
 
  - Create models that cover multiple stocks from the same sector at once and investigate the correlation between companies with similar business models.
   - Implement better/more advanced sentiment analysis based on social media sentiment in addition to news headlines.
