@@ -1,6 +1,6 @@
 # Regime Switch Detection
 ## Overview
-Regime detection has been a crucial field of investigation ever since the market crash in 2009. Broadly speaking, the stock market oscillates between two states: Bearish and Bullish, signified by a period of great volatility and steady growth, respectively. In this project, we aim to predict the aforementioned regimes by examining the trading data of stocks for several companies in various sectors. Additionally, we incorporate sentiment analysis in the previous analysis and investigate possible correlations.
+Regime detection has been a crucial field of investigation ever since the market crash in 2009. Broadly speaking, the stock market oscillates between two states: Bearish and Bullish, signified by periods of great volatility and steady growth, respectively. In this project, we aim to predict the aforementioned regimes by examining the trading data of stocks for several companies in various sectors. Additionally, we incorporate sentiment analysis into the previous analysis and investigate possible correlations.
 
 ## Requirements
 The following libraries are used and needed to run all the files in this repository.
@@ -16,15 +16,15 @@ The following libraries are used and needed to run all the files in this reposit
     - beautifulsoup
     - sentence_transformers
 
-Additionally, the codes are in jupyter notebook format. So you need jupyter notebook/vscode to run the codes.
+Additionally, the code is in Jupyter Notebook format. So you need Jupyter Notebook or VS Code to run the code.
 
 ## Data Collection
 
 1. We scrape stock data from [stooq.com](https://stooq.com) and news headlines from [businessinsider.com](businessinsider.com). The scraping code can be found in data_scraper.ipynb.  
 
-2. For the news headlines we use BERT and regex to remove duplicates and irrelevant headlines. This code can be found in duplication_removal.ipynb and remove_irrelevant.ipynb.  
+2. For the news headlines, we use BERT and regex to remove duplicates and irrelevant headlines. This code can be found in duplication_removal.ipynb and remove_irrelevant.ipynb.  
 
-3. We use GaussianHMM to generate labels representing market states for each of the seven stocks (stock_hmm.ipynb). To reduce noise in the data we use kalman filters to generate better labels (kalman.ipynb). The charts below are for AAPL, GOOGL and XOM respectively.
+3. We use GaussianHMM to generate labels representing market states for each of the seven stocks (stock_hmm.ipynb). To reduce noise in the data, we use Kalman filters to generate better labels (kalman.ipynb). The charts below are for AAPL, GOOGL, and XOM respectively.
 
 Without Kalman 
 <center><img src="./plots/aapl_wo_kalman.png" width="300"> <img src="./plots/non_kalman_googl.png" width="300"> <img src="./plots/xom_wo_kalman.png" width="300"></center>
@@ -35,7 +35,7 @@ With Kalman
 
 ## Training
 
-The following are a list of models we train (training_kalman.ipynb):  
+The following is a list of models we train (training_kalman.ipynb):  
    - k-Nearest Neighbor
    - DecisionTree
    - AdaBoost
@@ -45,10 +45,10 @@ The following are a list of models we train (training_kalman.ipynb):
    - Logistic Regression
    - Constant baseline prediction
  
-We use TimeSeriesSplit for cross-validation and create sliding windows to generate our training data (this code can also be found in training_kalman.ipynb, we used pickle to save this data since it takes a long time to generate). We also ran the cross-validation code over varied lengths of sliding windows. Here are some charts we got from that:  
+We use TimeSeriesSplit for cross-validation and create sliding windows to generate our training data (this code can also be found in training_kalman.ipynb; we used pickle to save this data since it takes a long time to generate). We also ran the cross-validation code over various lengths of sliding windows. Here are some charts we got from that:  
 <center><img src="./plots/xgb_nvda.png" width="350"> <img src="./plots/knn_aapl.png" width="350"> <img src="./plots/rfc_cvx.png" width="350"></center>  
 
-We use f1_score as our measurement of performance. Here is a table showing some of the best results from each model after tuning hyperparameters with optuna/gridsearchcv.
+We use f1_score as our measurement of performance. Here is a table showing some of the best results from each model after tuning hyperparameters with Optuna/GridSearchCV.
 <details>
 <summary>Click to see the table</summary>
 <div>
@@ -213,19 +213,19 @@ Accuracy</th>
 </td></tr>
   
 </table>  
-The high accuracy for DAL is explained by the very imbalanced labels for the stock. The relatively low accuracy for NVDA can be attributed to the recent volatility in the stock due to the LLM boom and the absence of such a period in the training data.
+The high accuracy for DAL can be explained by the highly imbalanced labels for the stock. The relatively low accuracy for NVDA can be attributed to the recent volatility in the stock caused by the LLM boom, which was not represented in the training data.
 
 ### Sentiment Analysis
-We incorporated the sentiment scores generated from the news headlines as an additional feature for training (training_with_sentiment.ipynb). However this lead to very minimal/no improvement at all. This could be due to our choice of stocks being less prone to being affected by sentiment. We wish to investigate more robust sentiment analysis in the future to get more noteworthy results in this direction.
+We incorporated the sentiment scores generated from the news headlines as an additional feature for training (training_with_sentiment.ipynb). However, this resulted in minimal to no improvement. This could be due to our chosen stocks being less sensitive to sentiment-driven movements. In the future, we aim to explore more robust sentiment analysis techniques to achieve more meaningful results in this direction.
 
 ## Final Thoughts  
 
-Additonally we ran the GOOGL trained model on MSFT stock data (not seen by any of our models before) and yielded positive results (accuracy score of 95.5% and F1-Score of 97.5%). This could indicate strong correlation between companies in the same sector of the market. For future directions, we could:
+Additonally we ran the GOOGL trained model on MSFT stock data (not seen by any of our models before) and yielded positive results (accuracy score of 95.5% and F1-Score of 97.5%). This could indicate strong correlation between companies within the same market sector. For future directions, we could:
 
- - Create models that cover multiple stocks from the same sector at once and investigate the correlation between companies that have similar business models.
-  - Implement better/more detailed sentiment analysis based on social media sentiment on top of news.
+ - Create models that cover multiple stocks from the same sector at once and investigate the correlation between companies with similar business models.
+  - Implement better/more advanced sentiment analysis based on social media sentiment in addition to news headlines.
   - Consider more than two states representing the market and interpret them accordingly.
-  - Create backtesting to check how our models perform trading in reality.
+  - Introduce backtesting frameworks to evaluate the practical trading performance of our models in real-world scenarios.
 
 ## References  
 Here are some existing research/articles that guided us in this project.
